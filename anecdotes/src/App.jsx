@@ -37,6 +37,7 @@ const App = () => {
   }
   return (
     <>
+      <h1>Anecdote of the day</h1>
       <div>
         {anecdotes[selected]}
         <br />
@@ -44,6 +45,13 @@ const App = () => {
       </div>
       <button onClick={handleVote}>vote</button>
       <button onClick={handleRandomAnecdote}>next anecdote</button>
+
+      <h1>Anecdote with most votes</h1>
+      <div>
+        {anecdotes[Object.keys(votes).reduce((accumulator, currentValue) => votes[accumulator] > votes[currentValue] ? accumulator : currentValue)]}
+        <br />
+        has {votes[Object.keys(votes).reduce((accumulator, currentValue) => votes[accumulator] > votes[currentValue] ? accumulator : currentValue)]} votes
+      </div>
     </>
   )
 }
