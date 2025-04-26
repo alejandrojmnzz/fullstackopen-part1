@@ -1,18 +1,17 @@
 import { useState } from 'react'
 
-const Statics = ({good, neutral, bad}) => {
-  if (good + neutral + bad !== 0) {
-    return (
-      <>
-        <h1>statistics</h1>
-        <p>good {good}</p>
-        <p>neutral {neutral}</p>
-        <p>bad {bad}</p>
-        <p>all {good + neutral + bad}</p>
-      </>
-    )
-  }
+const StaticLine = ({text, value}) => {
+  return (
+    <>
+      <p>{text} {value}</p> 
+    </>
+  )
+}
 
+const Button = ({text, onClick}) => {
+  return (
+    <button onClick={onClick}>{text}</button>
+  )
 }
 
 const App = () => {
@@ -32,12 +31,21 @@ const App = () => {
   return (
     <div>
       <h1>give feedback</h1>
-      <button onClick={handleGood}>good</button>
-      <button onClick={handleNeutral}>neutral</button>
-      <button onClick={handleBad}>bad</button>
+      <Button text="good" onClick={handleGood} />
+      <Button text="neutral" onClick={handleNeutral} />
+      <Button text="bad" onClick={handleBad} />
       
-      <Statics good={good} neutral={neutral} bad={bad}/>
-    </div>
+      {
+        good + neutral + bad != 0 &&
+        <>
+          <h1>statistics</h1>
+          <StaticLine text="good" value={good} />
+          <StaticLine text="neutral" value={neutral} />
+          <StaticLine text="bad" value={bad} />
+          <StaticLine text="all" value={good + neutral + bad} />
+        </>
+      }
+    </div>  
   )
 }
 
